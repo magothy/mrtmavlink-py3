@@ -1,3 +1,3 @@
-__version__ = "0.0"
-mavlink_sha1 = "0000000000000000000000000000000000000000"
-mavlink_conan_version = "v0"
+__version__ = "26.2"
+mavlink_sha1 = "60e704775121d28ac84ea610d5d1edddd3a00994"
+mavlink_conan_version = "v26"
