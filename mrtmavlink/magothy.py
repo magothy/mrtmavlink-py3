@@ -2226,20 +2226,20 @@ enums["MAV_FRAME"][22] = EnumEntry("MAV_FRAME_ENUM_END", """""")
 
 # MAVLINK_DATA_STREAM_TYPE
 enums["MAVLINK_DATA_STREAM_TYPE"] = {}
-MAVLINK_DATA_STREAM_IMG_JPEG = 1
-enums["MAVLINK_DATA_STREAM_TYPE"][1] = EnumEntry("MAVLINK_DATA_STREAM_IMG_JPEG", """""")
-MAVLINK_DATA_STREAM_IMG_BMP = 2
-enums["MAVLINK_DATA_STREAM_TYPE"][2] = EnumEntry("MAVLINK_DATA_STREAM_IMG_BMP", """""")
-MAVLINK_DATA_STREAM_IMG_RAW8U = 3
-enums["MAVLINK_DATA_STREAM_TYPE"][3] = EnumEntry("MAVLINK_DATA_STREAM_IMG_RAW8U", """""")
-MAVLINK_DATA_STREAM_IMG_RAW32U = 4
-enums["MAVLINK_DATA_STREAM_TYPE"][4] = EnumEntry("MAVLINK_DATA_STREAM_IMG_RAW32U", """""")
-MAVLINK_DATA_STREAM_IMG_PGM = 5
-enums["MAVLINK_DATA_STREAM_TYPE"][5] = EnumEntry("MAVLINK_DATA_STREAM_IMG_PGM", """""")
-MAVLINK_DATA_STREAM_IMG_PNG = 6
-enums["MAVLINK_DATA_STREAM_TYPE"][6] = EnumEntry("MAVLINK_DATA_STREAM_IMG_PNG", """""")
-MAVLINK_DATA_STREAM_TYPE_ENUM_END = 7
-enums["MAVLINK_DATA_STREAM_TYPE"][7] = EnumEntry("MAVLINK_DATA_STREAM_TYPE_ENUM_END", """""")
+MAVLINK_DATA_STREAM_IMG_JPEG = 0
+enums["MAVLINK_DATA_STREAM_TYPE"][0] = EnumEntry("MAVLINK_DATA_STREAM_IMG_JPEG", """""")
+MAVLINK_DATA_STREAM_IMG_BMP = 1
+enums["MAVLINK_DATA_STREAM_TYPE"][1] = EnumEntry("MAVLINK_DATA_STREAM_IMG_BMP", """""")
+MAVLINK_DATA_STREAM_IMG_RAW8U = 2
+enums["MAVLINK_DATA_STREAM_TYPE"][2] = EnumEntry("MAVLINK_DATA_STREAM_IMG_RAW8U", """""")
+MAVLINK_DATA_STREAM_IMG_RAW32U = 3
+enums["MAVLINK_DATA_STREAM_TYPE"][3] = EnumEntry("MAVLINK_DATA_STREAM_IMG_RAW32U", """""")
+MAVLINK_DATA_STREAM_IMG_PGM = 4
+enums["MAVLINK_DATA_STREAM_TYPE"][4] = EnumEntry("MAVLINK_DATA_STREAM_IMG_PGM", """""")
+MAVLINK_DATA_STREAM_IMG_PNG = 5
+enums["MAVLINK_DATA_STREAM_TYPE"][5] = EnumEntry("MAVLINK_DATA_STREAM_IMG_PNG", """""")
+MAVLINK_DATA_STREAM_TYPE_ENUM_END = 6
+enums["MAVLINK_DATA_STREAM_TYPE"][6] = EnumEntry("MAVLINK_DATA_STREAM_TYPE_ENUM_END", """""")
 
 # FENCE_ACTION
 enums["FENCE_ACTION"] = {}
@@ -2667,8 +2667,17 @@ enums["MAV_ROI"][5] = EnumEntry("MAV_ROI_ENUM_END", """""")
 
 # MAV_CMD_ACK
 enums["MAV_CMD_ACK"] = {}
-MAV_CMD_ACK_OK = 1
-enums["MAV_CMD_ACK"][1] = EnumEntry("MAV_CMD_ACK_OK", """Command / mission item is ok.""")
+MAV_CMD_ACK_OK = 0
+enums["MAV_CMD_ACK"][0] = EnumEntry("MAV_CMD_ACK_OK", """Command / mission item is ok.""")
+enums["MAV_CMD_ACK"][0].param[1] = """Reserved (default:0)"""
+enums["MAV_CMD_ACK"][0].param[2] = """Reserved (default:0)"""
+enums["MAV_CMD_ACK"][0].param[3] = """Reserved (default:0)"""
+enums["MAV_CMD_ACK"][0].param[4] = """Reserved (default:0)"""
+enums["MAV_CMD_ACK"][0].param[5] = """Reserved (default:0)"""
+enums["MAV_CMD_ACK"][0].param[6] = """Reserved (default:0)"""
+enums["MAV_CMD_ACK"][0].param[7] = """Reserved (default:0)"""
+MAV_CMD_ACK_ERR_FAIL = 1
+enums["MAV_CMD_ACK"][1] = EnumEntry("MAV_CMD_ACK_ERR_FAIL", """Generic error message if none of the other reasons fails or if no detailed error reporting is implemented.""")
 enums["MAV_CMD_ACK"][1].param[1] = """Reserved (default:0)"""
 enums["MAV_CMD_ACK"][1].param[2] = """Reserved (default:0)"""
 enums["MAV_CMD_ACK"][1].param[3] = """Reserved (default:0)"""
@@ -2676,8 +2685,8 @@ enums["MAV_CMD_ACK"][1].param[4] = """Reserved (default:0)"""
 enums["MAV_CMD_ACK"][1].param[5] = """Reserved (default:0)"""
 enums["MAV_CMD_ACK"][1].param[6] = """Reserved (default:0)"""
 enums["MAV_CMD_ACK"][1].param[7] = """Reserved (default:0)"""
-MAV_CMD_ACK_ERR_FAIL = 2
-enums["MAV_CMD_ACK"][2] = EnumEntry("MAV_CMD_ACK_ERR_FAIL", """Generic error message if none of the other reasons fails or if no detailed error reporting is implemented.""")
+MAV_CMD_ACK_ERR_ACCESS_DENIED = 2
+enums["MAV_CMD_ACK"][2] = EnumEntry("MAV_CMD_ACK_ERR_ACCESS_DENIED", """The system is refusing to accept this command from this source / communication partner.""")
 enums["MAV_CMD_ACK"][2].param[1] = """Reserved (default:0)"""
 enums["MAV_CMD_ACK"][2].param[2] = """Reserved (default:0)"""
 enums["MAV_CMD_ACK"][2].param[3] = """Reserved (default:0)"""
@@ -2685,8 +2694,8 @@ enums["MAV_CMD_ACK"][2].param[4] = """Reserved (default:0)"""
 enums["MAV_CMD_ACK"][2].param[5] = """Reserved (default:0)"""
 enums["MAV_CMD_ACK"][2].param[6] = """Reserved (default:0)"""
 enums["MAV_CMD_ACK"][2].param[7] = """Reserved (default:0)"""
-MAV_CMD_ACK_ERR_ACCESS_DENIED = 3
-enums["MAV_CMD_ACK"][3] = EnumEntry("MAV_CMD_ACK_ERR_ACCESS_DENIED", """The system is refusing to accept this command from this source / communication partner.""")
+MAV_CMD_ACK_ERR_NOT_SUPPORTED = 3
+enums["MAV_CMD_ACK"][3] = EnumEntry("MAV_CMD_ACK_ERR_NOT_SUPPORTED", """Command or mission item is not supported, other commands would be accepted.""")
 enums["MAV_CMD_ACK"][3].param[1] = """Reserved (default:0)"""
 enums["MAV_CMD_ACK"][3].param[2] = """Reserved (default:0)"""
 enums["MAV_CMD_ACK"][3].param[3] = """Reserved (default:0)"""
@@ -2694,8 +2703,8 @@ enums["MAV_CMD_ACK"][3].param[4] = """Reserved (default:0)"""
 enums["MAV_CMD_ACK"][3].param[5] = """Reserved (default:0)"""
 enums["MAV_CMD_ACK"][3].param[6] = """Reserved (default:0)"""
 enums["MAV_CMD_ACK"][3].param[7] = """Reserved (default:0)"""
-MAV_CMD_ACK_ERR_NOT_SUPPORTED = 4
-enums["MAV_CMD_ACK"][4] = EnumEntry("MAV_CMD_ACK_ERR_NOT_SUPPORTED", """Command or mission item is not supported, other commands would be accepted.""")
+MAV_CMD_ACK_ERR_COORDINATE_FRAME_NOT_SUPPORTED = 4
+enums["MAV_CMD_ACK"][4] = EnumEntry("MAV_CMD_ACK_ERR_COORDINATE_FRAME_NOT_SUPPORTED", """The coordinate frame of this command / mission item is not supported.""")
 enums["MAV_CMD_ACK"][4].param[1] = """Reserved (default:0)"""
 enums["MAV_CMD_ACK"][4].param[2] = """Reserved (default:0)"""
 enums["MAV_CMD_ACK"][4].param[3] = """Reserved (default:0)"""
@@ -2703,8 +2712,8 @@ enums["MAV_CMD_ACK"][4].param[4] = """Reserved (default:0)"""
 enums["MAV_CMD_ACK"][4].param[5] = """Reserved (default:0)"""
 enums["MAV_CMD_ACK"][4].param[6] = """Reserved (default:0)"""
 enums["MAV_CMD_ACK"][4].param[7] = """Reserved (default:0)"""
-MAV_CMD_ACK_ERR_COORDINATE_FRAME_NOT_SUPPORTED = 5
-enums["MAV_CMD_ACK"][5] = EnumEntry("MAV_CMD_ACK_ERR_COORDINATE_FRAME_NOT_SUPPORTED", """The coordinate frame of this command / mission item is not supported.""")
+MAV_CMD_ACK_ERR_COORDINATES_OUT_OF_RANGE = 5
+enums["MAV_CMD_ACK"][5] = EnumEntry("MAV_CMD_ACK_ERR_COORDINATES_OUT_OF_RANGE", """The coordinate frame of this command is ok, but he coordinate values exceed the safety limits of this system. This is a generic error, please use the more specific error messages below if possible.""")
 enums["MAV_CMD_ACK"][5].param[1] = """Reserved (default:0)"""
 enums["MAV_CMD_ACK"][5].param[2] = """Reserved (default:0)"""
 enums["MAV_CMD_ACK"][5].param[3] = """Reserved (default:0)"""
@@ -2712,8 +2721,8 @@ enums["MAV_CMD_ACK"][5].param[4] = """Reserved (default:0)"""
 enums["MAV_CMD_ACK"][5].param[5] = """Reserved (default:0)"""
 enums["MAV_CMD_ACK"][5].param[6] = """Reserved (default:0)"""
 enums["MAV_CMD_ACK"][5].param[7] = """Reserved (default:0)"""
-MAV_CMD_ACK_ERR_COORDINATES_OUT_OF_RANGE = 6
-enums["MAV_CMD_ACK"][6] = EnumEntry("MAV_CMD_ACK_ERR_COORDINATES_OUT_OF_RANGE", """The coordinate frame of this command is ok, but he coordinate values exceed the safety limits of this system. This is a generic error, please use the more specific error messages below if possible.""")
+MAV_CMD_ACK_ERR_X_LAT_OUT_OF_RANGE = 6
+enums["MAV_CMD_ACK"][6] = EnumEntry("MAV_CMD_ACK_ERR_X_LAT_OUT_OF_RANGE", """The X or latitude value is out of range.""")
 enums["MAV_CMD_ACK"][6].param[1] = """Reserved (default:0)"""
 enums["MAV_CMD_ACK"][6].param[2] = """Reserved (default:0)"""
 enums["MAV_CMD_ACK"][6].param[3] = """Reserved (default:0)"""
@@ -2721,8 +2730,8 @@ enums["MAV_CMD_ACK"][6].param[4] = """Reserved (default:0)"""
 enums["MAV_CMD_ACK"][6].param[5] = """Reserved (default:0)"""
 enums["MAV_CMD_ACK"][6].param[6] = """Reserved (default:0)"""
 enums["MAV_CMD_ACK"][6].param[7] = """Reserved (default:0)"""
-MAV_CMD_ACK_ERR_X_LAT_OUT_OF_RANGE = 7
-enums["MAV_CMD_ACK"][7] = EnumEntry("MAV_CMD_ACK_ERR_X_LAT_OUT_OF_RANGE", """The X or latitude value is out of range.""")
+MAV_CMD_ACK_ERR_Y_LON_OUT_OF_RANGE = 7
+enums["MAV_CMD_ACK"][7] = EnumEntry("MAV_CMD_ACK_ERR_Y_LON_OUT_OF_RANGE", """The Y or longitude value is out of range.""")
 enums["MAV_CMD_ACK"][7].param[1] = """Reserved (default:0)"""
 enums["MAV_CMD_ACK"][7].param[2] = """Reserved (default:0)"""
 enums["MAV_CMD_ACK"][7].param[3] = """Reserved (default:0)"""
@@ -2730,8 +2739,8 @@ enums["MAV_CMD_ACK"][7].param[4] = """Reserved (default:0)"""
 enums["MAV_CMD_ACK"][7].param[5] = """Reserved (default:0)"""
 enums["MAV_CMD_ACK"][7].param[6] = """Reserved (default:0)"""
 enums["MAV_CMD_ACK"][7].param[7] = """Reserved (default:0)"""
-MAV_CMD_ACK_ERR_Y_LON_OUT_OF_RANGE = 8
-enums["MAV_CMD_ACK"][8] = EnumEntry("MAV_CMD_ACK_ERR_Y_LON_OUT_OF_RANGE", """The Y or longitude value is out of range.""")
+MAV_CMD_ACK_ERR_Z_ALT_OUT_OF_RANGE = 8
+enums["MAV_CMD_ACK"][8] = EnumEntry("MAV_CMD_ACK_ERR_Z_ALT_OUT_OF_RANGE", """The Z or altitude value is out of range.""")
 enums["MAV_CMD_ACK"][8].param[1] = """Reserved (default:0)"""
 enums["MAV_CMD_ACK"][8].param[2] = """Reserved (default:0)"""
 enums["MAV_CMD_ACK"][8].param[3] = """Reserved (default:0)"""
@@ -2739,17 +2748,8 @@ enums["MAV_CMD_ACK"][8].param[4] = """Reserved (default:0)"""
 enums["MAV_CMD_ACK"][8].param[5] = """Reserved (default:0)"""
 enums["MAV_CMD_ACK"][8].param[6] = """Reserved (default:0)"""
 enums["MAV_CMD_ACK"][8].param[7] = """Reserved (default:0)"""
-MAV_CMD_ACK_ERR_Z_ALT_OUT_OF_RANGE = 9
-enums["MAV_CMD_ACK"][9] = EnumEntry("MAV_CMD_ACK_ERR_Z_ALT_OUT_OF_RANGE", """The Z or altitude value is out of range.""")
-enums["MAV_CMD_ACK"][9].param[1] = """Reserved (default:0)"""
-enums["MAV_CMD_ACK"][9].param[2] = """Reserved (default:0)"""
-enums["MAV_CMD_ACK"][9].param[3] = """Reserved (default:0)"""
-enums["MAV_CMD_ACK"][9].param[4] = """Reserved (default:0)"""
-enums["MAV_CMD_ACK"][9].param[5] = """Reserved (default:0)"""
-enums["MAV_CMD_ACK"][9].param[6] = """Reserved (default:0)"""
-enums["MAV_CMD_ACK"][9].param[7] = """Reserved (default:0)"""
-MAV_CMD_ACK_ENUM_END = 10
-enums["MAV_CMD_ACK"][10] = EnumEntry("MAV_CMD_ACK_ENUM_END", """""")
+MAV_CMD_ACK_ENUM_END = 9
+enums["MAV_CMD_ACK"][9] = EnumEntry("MAV_CMD_ACK_ENUM_END", """""")
 
 # MAV_PARAM_TYPE
 enums["MAV_PARAM_TYPE"] = {}
@@ -5001,6 +5001,7 @@ MAVLINK_MSG_ID_MAGOTHY_LICENSE_TRANSFER_ACK = 50155
 MAVLINK_MSG_ID_MAGOTHY_MISSION_REQUEST = 50250
 MAVLINK_MSG_ID_MAGOTHY_MISSION_TRANSFER = 50251
 MAVLINK_MSG_ID_MAGOTHY_MISSION_ACK = 50252
+MAVLINK_MSG_ID_MAGOTHY_BEACON_DETECTION = 50006
 MAVLINK_MSG_ID_SYS_STATUS = 1
 MAVLINK_MSG_ID_SYSTEM_TIME = 2
 MAVLINK_MSG_ID_PING = 4
@@ -5907,6 +5908,50 @@ class MAVLink_magothy_mission_ack_message(MAVLink_message):
 # Define name on the class for backwards compatibility (it is now msgname).
 # Done with setattr to hide the class variable from mypy.
 setattr(MAVLink_magothy_mission_ack_message, "name", mavlink_msg_deprecated_name_property())
+
+
+class MAVLink_magothy_beacon_detection_message(MAVLink_message):
+    """
+    Report beacon detection
+    """
+
+    id = MAVLINK_MSG_ID_MAGOTHY_BEACON_DETECTION
+    msgname = "MAGOTHY_BEACON_DETECTION"
+    fieldnames = ["beacon_id", "position_mask", "lat_deg", "lon_deg", "speed_mps", "course_deg", "error_m"]
+    ordered_fieldnames = ["lat_deg", "lon_deg", "speed_mps", "course_deg", "error_m", "position_mask", "beacon_id"]
+    fieldtypes = ["uint8_t", "uint16_t", "float", "float", "float", "float", "float"]
+    fielddisplays_by_name: Dict[str, str] = {}
+    fieldenums_by_name: Dict[str, str] = {}
+    fieldunits_by_name: Dict[str, str] = {}
+    native_format = bytearray(b"<fffffHB")
+    orders = [6, 5, 0, 1, 2, 3, 4]
+    lengths = [1, 1, 1, 1, 1, 1, 1]
+    array_lengths = [0, 0, 0, 0, 0, 0, 0]
+    crc_extra = 89
+    unpacker = struct.Struct("<fffffHB")
+    instance_field = None
+    instance_offset = -1
+
+    def __init__(self, beacon_id: int, position_mask: int, lat_deg: float, lon_deg: float, speed_mps: float, course_deg: float, error_m: float):
+        MAVLink_message.__init__(self, MAVLink_magothy_beacon_detection_message.id, MAVLink_magothy_beacon_detection_message.msgname)
+        self._fieldnames = MAVLink_magothy_beacon_detection_message.fieldnames
+        self._instance_field = MAVLink_magothy_beacon_detection_message.instance_field
+        self._instance_offset = MAVLink_magothy_beacon_detection_message.instance_offset
+        self.beacon_id = beacon_id
+        self.position_mask = position_mask
+        self.lat_deg = lat_deg
+        self.lon_deg = lon_deg
+        self.speed_mps = speed_mps
+        self.course_deg = course_deg
+        self.error_m = error_m
+
+    def pack(self, mav: "MAVLink", force_mavlink1: bool = False) -> bytes:
+        return self._pack(mav, self.crc_extra, self.unpacker.pack(self.lat_deg, self.lon_deg, self.speed_mps, self.course_deg, self.error_m, self.position_mask, self.beacon_id), force_mavlink1=force_mavlink1)
+
+
+# Define name on the class for backwards compatibility (it is now msgname).
+# Done with setattr to hide the class variable from mypy.
+setattr(MAVLink_magothy_beacon_detection_message, "name", mavlink_msg_deprecated_name_property())
 
 
 class MAVLink_sys_status_message(MAVLink_message):
@@ -16103,6 +16148,7 @@ mavlink_map: Dict[int, Type[MAVLink_message]] = {
     MAVLINK_MSG_ID_MAGOTHY_MISSION_REQUEST: MAVLink_magothy_mission_request_message,
     MAVLINK_MSG_ID_MAGOTHY_MISSION_TRANSFER: MAVLink_magothy_mission_transfer_message,
     MAVLINK_MSG_ID_MAGOTHY_MISSION_ACK: MAVLink_magothy_mission_ack_message,
+    MAVLINK_MSG_ID_MAGOTHY_BEACON_DETECTION: MAVLink_magothy_beacon_detection_message,
     MAVLINK_MSG_ID_SYS_STATUS: MAVLink_sys_status_message,
     MAVLINK_MSG_ID_SYSTEM_TIME: MAVLink_system_time_message,
     MAVLINK_MSG_ID_PING: MAVLink_ping_message,
@@ -17224,6 +17270,36 @@ class MAVLink(object):
 
         """
         self.send(self.magothy_mission_ack_encode(target_system, session_id, chunk_index, num_chunk, crc16, result), force_mavlink1=force_mavlink1)
+
+    def magothy_beacon_detection_encode(self, beacon_id: int, position_mask: int, lat_deg: float, lon_deg: float, speed_mps: float, course_deg: float, error_m: float) -> MAVLink_magothy_beacon_detection_message:
+        """
+        Report beacon detection
+
+        beacon_id                 : beacon id of detection (type:uint8_t)
+        position_mask             : 12-bit bitmask, 30 deg increments, bit 0 == 0deg, bit 1 == 30deg, ... (type:uint16_t)
+        lat_deg                   : Latitude (deg) (type:float)
+        lon_deg                   : Longitude (deg) (type:float)
+        speed_mps                 : Speed (m/s) (type:float)
+        course_deg                : Course (deg) (type:float)
+        error_m                   : Estimated Position Error (m) (type:float)
+
+        """
+        return MAVLink_magothy_beacon_detection_message(beacon_id, position_mask, lat_deg, lon_deg, speed_mps, course_deg, error_m)
+
+    def magothy_beacon_detection_send(self, beacon_id: int, position_mask: int, lat_deg: float, lon_deg: float, speed_mps: float, course_deg: float, error_m: float, force_mavlink1: bool = False) -> None:
+        """
+        Report beacon detection
+
+        beacon_id                 : beacon id of detection (type:uint8_t)
+        position_mask             : 12-bit bitmask, 30 deg increments, bit 0 == 0deg, bit 1 == 30deg, ... (type:uint16_t)
+        lat_deg                   : Latitude (deg) (type:float)
+        lon_deg                   : Longitude (deg) (type:float)
+        speed_mps                 : Speed (m/s) (type:float)
+        course_deg                : Course (deg) (type:float)
+        error_m                   : Estimated Position Error (m) (type:float)
+
+        """
+        self.send(self.magothy_beacon_detection_encode(beacon_id, position_mask, lat_deg, lon_deg, speed_mps, course_deg, error_m), force_mavlink1=force_mavlink1)
 
     def sys_status_encode(self, onboard_control_sensors_present: int, onboard_control_sensors_enabled: int, onboard_control_sensors_health: int, load: int, voltage_battery: int, current_battery: int, battery_remaining: int, drop_rate_comm: int, errors_comm: int, errors_count1: int, errors_count2: int, errors_count3: int, errors_count4: int) -> MAVLink_sys_status_message:
         """
