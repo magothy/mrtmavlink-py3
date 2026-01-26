@@ -5465,22 +5465,22 @@ class MAVLink_magothy_low_bandwidth_message(MAVLink_message):
 
     id = MAVLINK_MSG_ID_MAGOTHY_LOW_BANDWIDTH
     msgname = "MAGOTHY_LOW_BANDWIDTH"
-    fieldnames = ["type", "custom_mode", "onboard_control_sensors_present", "onboard_control_sensors_enabled", "onboard_control_sensors_health", "voltage_battery", "current_battery", "battery_remaining", "mission_seq", "lat", "lon", "speed", "course", "satellites_visible", "heading", "is_position_independent", "position_error", "desired_speed", "desired_course", "gcs_set_mode_uuid_lsb", "mission_crc"]
-    ordered_fieldnames = ["custom_mode", "onboard_control_sensors_present", "onboard_control_sensors_enabled", "onboard_control_sensors_health", "lat", "lon", "voltage_battery", "current_battery", "mission_seq", "speed", "course", "heading", "position_error", "desired_speed", "desired_course", "type", "battery_remaining", "satellites_visible", "is_position_independent", "gcs_set_mode_uuid_lsb", "mission_crc"]
-    fieldtypes = ["uint8_t", "uint32_t", "uint32_t", "uint32_t", "uint32_t", "uint16_t", "int16_t", "int8_t", "uint16_t", "int32_t", "int32_t", "uint16_t", "uint16_t", "uint8_t", "uint16_t", "uint8_t", "uint16_t", "uint16_t", "uint16_t", "uint32_t", "uint16_t"]
+    fieldnames = ["type", "custom_mode", "onboard_control_sensors_present", "onboard_control_sensors_enabled", "onboard_control_sensors_health", "voltage_battery", "current_battery", "battery_remaining", "mission_seq", "lat", "lon", "speed", "course", "satellites_visible", "heading", "is_position_independent", "position_error", "desired_speed", "desired_course", "gcs_set_mode_uuid_lsb", "mission_crc", "altitude", "depth"]
+    ordered_fieldnames = ["custom_mode", "onboard_control_sensors_present", "onboard_control_sensors_enabled", "onboard_control_sensors_health", "lat", "lon", "voltage_battery", "current_battery", "mission_seq", "speed", "course", "heading", "position_error", "desired_speed", "desired_course", "type", "battery_remaining", "satellites_visible", "is_position_independent", "gcs_set_mode_uuid_lsb", "mission_crc", "altitude", "depth"]
+    fieldtypes = ["uint8_t", "uint32_t", "uint32_t", "uint32_t", "uint32_t", "uint16_t", "int16_t", "int8_t", "uint16_t", "int32_t", "int32_t", "uint16_t", "uint16_t", "uint8_t", "uint16_t", "uint8_t", "uint16_t", "uint16_t", "uint16_t", "uint32_t", "uint16_t", "float", "float"]
     fielddisplays_by_name: Dict[str, str] = {"onboard_control_sensors_present": "bitmask", "onboard_control_sensors_enabled": "bitmask", "onboard_control_sensors_health": "bitmask"}
     fieldenums_by_name: Dict[str, str] = {"type": "MAV_TYPE", "onboard_control_sensors_present": "MAV_SYS_STATUS_SENSOR", "onboard_control_sensors_enabled": "MAV_SYS_STATUS_SENSOR", "onboard_control_sensors_health": "MAV_SYS_STATUS_SENSOR"}
-    fieldunits_by_name: Dict[str, str] = {"voltage_battery": "mV", "current_battery": "cA", "battery_remaining": "%", "lat": "degE7", "lon": "degE7", "speed": "cm/s", "course": "cdeg", "heading": "cdeg", "position_error": "cm", "desired_speed": "cm/s", "desired_course": "cdeg"}
-    native_format = bytearray(b"<IIIIiiHhHHHHHHHBbBBIH")
-    orders = [15, 0, 1, 2, 3, 6, 7, 16, 8, 4, 5, 9, 10, 17, 11, 18, 12, 13, 14, 19, 20]
-    lengths = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
-    array_lengths = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    fieldunits_by_name: Dict[str, str] = {"voltage_battery": "mV", "current_battery": "cA", "battery_remaining": "%", "lat": "degE7", "lon": "degE7", "speed": "cm/s", "course": "cdeg", "heading": "cdeg", "position_error": "cm", "desired_speed": "cm/s", "desired_course": "cdeg", "altitude": "m", "depth": "m"}
+    native_format = bytearray(b"<IIIIiiHhHHHHHHHBbBBIHff")
+    orders = [15, 0, 1, 2, 3, 6, 7, 16, 8, 4, 5, 9, 10, 17, 11, 18, 12, 13, 14, 19, 20, 21, 22]
+    lengths = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+    array_lengths = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     crc_extra = 243
-    unpacker = struct.Struct("<IIIIiiHhHHHHHHHBbBBIH")
+    unpacker = struct.Struct("<IIIIiiHhHHHHHHHBbBBIHff")
     instance_field = None
     instance_offset = -1
 
-    def __init__(self, type: int, custom_mode: int, onboard_control_sensors_present: int, onboard_control_sensors_enabled: int, onboard_control_sensors_health: int, voltage_battery: int, current_battery: int, battery_remaining: int, mission_seq: int, lat: int, lon: int, speed: int, course: int, satellites_visible: int, heading: int, is_position_independent: int, position_error: int, desired_speed: int, desired_course: int, gcs_set_mode_uuid_lsb: int = 0, mission_crc: int = 0):
+    def __init__(self, type: int, custom_mode: int, onboard_control_sensors_present: int, onboard_control_sensors_enabled: int, onboard_control_sensors_health: int, voltage_battery: int, current_battery: int, battery_remaining: int, mission_seq: int, lat: int, lon: int, speed: int, course: int, satellites_visible: int, heading: int, is_position_independent: int, position_error: int, desired_speed: int, desired_course: int, gcs_set_mode_uuid_lsb: int = 0, mission_crc: int = 0, altitude: float = 0, depth: float = 0):
         MAVLink_message.__init__(self, MAVLink_magothy_low_bandwidth_message.id, MAVLink_magothy_low_bandwidth_message.msgname)
         self._fieldnames = MAVLink_magothy_low_bandwidth_message.fieldnames
         self._instance_field = MAVLink_magothy_low_bandwidth_message.instance_field
@@ -5506,9 +5506,11 @@ class MAVLink_magothy_low_bandwidth_message(MAVLink_message):
         self.desired_course = desired_course
         self.gcs_set_mode_uuid_lsb = gcs_set_mode_uuid_lsb
         self.mission_crc = mission_crc
+        self.altitude = altitude
+        self.depth = depth
 
     def pack(self, mav: "MAVLink", force_mavlink1: bool = False) -> bytes:
-        return self._pack(mav, self.crc_extra, self.unpacker.pack(self.custom_mode, self.onboard_control_sensors_present, self.onboard_control_sensors_enabled, self.onboard_control_sensors_health, self.lat, self.lon, self.voltage_battery, self.current_battery, self.mission_seq, self.speed, self.course, self.heading, self.position_error, self.desired_speed, self.desired_course, self.type, self.battery_remaining, self.satellites_visible, self.is_position_independent, self.gcs_set_mode_uuid_lsb, self.mission_crc), force_mavlink1=force_mavlink1)
+        return self._pack(mav, self.crc_extra, self.unpacker.pack(self.custom_mode, self.onboard_control_sensors_present, self.onboard_control_sensors_enabled, self.onboard_control_sensors_health, self.lat, self.lon, self.voltage_battery, self.current_battery, self.mission_seq, self.speed, self.course, self.heading, self.position_error, self.desired_speed, self.desired_course, self.type, self.battery_remaining, self.satellites_visible, self.is_position_independent, self.gcs_set_mode_uuid_lsb, self.mission_crc, self.altitude, self.depth), force_mavlink1=force_mavlink1)
 
 
 # Define name on the class for backwards compatibility (it is now msgname).
@@ -16980,7 +16982,7 @@ class MAVLink(object):
         """
         self.send(self.magothy_3d_mag_cal_params_encode(hard_iron, soft_iron, uncalibrated_norm_mean, uncalibrated_norm_std_dev, uncalibrated_norm_max_error, calibrated_norm_mean, calibrated_norm_std_dev, calibrated_norm_max_error), force_mavlink1=force_mavlink1)
 
-    def magothy_low_bandwidth_encode(self, type: int, custom_mode: int, onboard_control_sensors_present: int, onboard_control_sensors_enabled: int, onboard_control_sensors_health: int, voltage_battery: int, current_battery: int, battery_remaining: int, mission_seq: int, lat: int, lon: int, speed: int, course: int, satellites_visible: int, heading: int, is_position_independent: int, position_error: int, desired_speed: int, desired_course: int, gcs_set_mode_uuid_lsb: int = 0, mission_crc: int = 0) -> MAVLink_magothy_low_bandwidth_message:
+    def magothy_low_bandwidth_encode(self, type: int, custom_mode: int, onboard_control_sensors_present: int, onboard_control_sensors_enabled: int, onboard_control_sensors_health: int, voltage_battery: int, current_battery: int, battery_remaining: int, mission_seq: int, lat: int, lon: int, speed: int, course: int, satellites_visible: int, heading: int, is_position_independent: int, position_error: int, desired_speed: int, desired_course: int, gcs_set_mode_uuid_lsb: int = 0, mission_crc: int = 0, altitude: float = 0, depth: float = 0) -> MAVLink_magothy_low_bandwidth_message:
         """
         The heartbeat message shows that a system or component is present and
         responding. The type and autopilot fields (along with the
@@ -17011,11 +17013,13 @@ class MAVLink(object):
         desired_course            : Desired course over ground in degrees * 100, 0.0..359.99 degrees. If unknown, set to: UINT16_MAX [cdeg] (type:uint16_t)
         gcs_set_mode_uuid_lsb        : UUID of most recent mode change (type:uint32_t)
         mission_crc               : CRC-16/CCITT-FALSE of serialized loaded mission (type:uint16_t)
+        altitude                  : Altitude - NaN for unset. On USV: altimeter reading. On arial drone: MSL [m] (type:float)
+        depth                     : Depth - NaN for unset. Depth below waterline [m] (type:float)
 
         """
-        return MAVLink_magothy_low_bandwidth_message(type, custom_mode, onboard_control_sensors_present, onboard_control_sensors_enabled, onboard_control_sensors_health, voltage_battery, current_battery, battery_remaining, mission_seq, lat, lon, speed, course, satellites_visible, heading, is_position_independent, position_error, desired_speed, desired_course, gcs_set_mode_uuid_lsb, mission_crc)
+        return MAVLink_magothy_low_bandwidth_message(type, custom_mode, onboard_control_sensors_present, onboard_control_sensors_enabled, onboard_control_sensors_health, voltage_battery, current_battery, battery_remaining, mission_seq, lat, lon, speed, course, satellites_visible, heading, is_position_independent, position_error, desired_speed, desired_course, gcs_set_mode_uuid_lsb, mission_crc, altitude, depth)
 
-    def magothy_low_bandwidth_send(self, type: int, custom_mode: int, onboard_control_sensors_present: int, onboard_control_sensors_enabled: int, onboard_control_sensors_health: int, voltage_battery: int, current_battery: int, battery_remaining: int, mission_seq: int, lat: int, lon: int, speed: int, course: int, satellites_visible: int, heading: int, is_position_independent: int, position_error: int, desired_speed: int, desired_course: int, gcs_set_mode_uuid_lsb: int = 0, mission_crc: int = 0, force_mavlink1: bool = False) -> None:
+    def magothy_low_bandwidth_send(self, type: int, custom_mode: int, onboard_control_sensors_present: int, onboard_control_sensors_enabled: int, onboard_control_sensors_health: int, voltage_battery: int, current_battery: int, battery_remaining: int, mission_seq: int, lat: int, lon: int, speed: int, course: int, satellites_visible: int, heading: int, is_position_independent: int, position_error: int, desired_speed: int, desired_course: int, gcs_set_mode_uuid_lsb: int = 0, mission_crc: int = 0, altitude: float = 0, depth: float = 0, force_mavlink1: bool = False) -> None:
         """
         The heartbeat message shows that a system or component is present and
         responding. The type and autopilot fields (along with the
@@ -17046,9 +17050,11 @@ class MAVLink(object):
         desired_course            : Desired course over ground in degrees * 100, 0.0..359.99 degrees. If unknown, set to: UINT16_MAX [cdeg] (type:uint16_t)
         gcs_set_mode_uuid_lsb        : UUID of most recent mode change (type:uint32_t)
         mission_crc               : CRC-16/CCITT-FALSE of serialized loaded mission (type:uint16_t)
+        altitude                  : Altitude - NaN for unset. On USV: altimeter reading. On arial drone: MSL [m] (type:float)
+        depth                     : Depth - NaN for unset. Depth below waterline [m] (type:float)
 
         """
-        self.send(self.magothy_low_bandwidth_encode(type, custom_mode, onboard_control_sensors_present, onboard_control_sensors_enabled, onboard_control_sensors_health, voltage_battery, current_battery, battery_remaining, mission_seq, lat, lon, speed, course, satellites_visible, heading, is_position_independent, position_error, desired_speed, desired_course, gcs_set_mode_uuid_lsb, mission_crc), force_mavlink1=force_mavlink1)
+        self.send(self.magothy_low_bandwidth_encode(type, custom_mode, onboard_control_sensors_present, onboard_control_sensors_enabled, onboard_control_sensors_health, voltage_battery, current_battery, battery_remaining, mission_seq, lat, lon, speed, course, satellites_visible, heading, is_position_independent, position_error, desired_speed, desired_course, gcs_set_mode_uuid_lsb, mission_crc, altitude, depth), force_mavlink1=force_mavlink1)
 
     def magothy_protobuf_proxy_encode(self, proto_id: int, is_compressed: int, data_len: int, data: Sequence[int]) -> MAVLink_magothy_protobuf_proxy_message:
         """
