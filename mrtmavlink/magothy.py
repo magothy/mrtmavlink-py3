@@ -5968,22 +5968,22 @@ class MAVLink_magothy_teleop_safety_message(MAVLink_message):
 
     id = MAVLINK_MSG_ID_MAGOTHY_TELEOP_SAFETY
     msgname = "MAGOTHY_TELEOP_SAFETY"
-    fieldnames = ["is_enabled", "is_safe", "is_safe_latched", "distance_to_obstacle_m"]
-    ordered_fieldnames = ["distance_to_obstacle_m", "is_enabled", "is_safe", "is_safe_latched"]
-    fieldtypes = ["uint8_t", "uint8_t", "uint8_t", "float"]
+    fieldnames = ["is_enabled", "is_safe", "is_safe_latched", "distance_to_obstacle_m", "min_safe_distance_m", "field_of_view_deg", "bearing_to_obstacle_deg"]
+    ordered_fieldnames = ["distance_to_obstacle_m", "is_enabled", "is_safe", "is_safe_latched", "min_safe_distance_m", "field_of_view_deg", "bearing_to_obstacle_deg"]
+    fieldtypes = ["uint8_t", "uint8_t", "uint8_t", "float", "float", "float", "float"]
     fielddisplays_by_name: Dict[str, str] = {}
     fieldenums_by_name: Dict[str, str] = {}
-    fieldunits_by_name: Dict[str, str] = {"distance_to_obstacle_m": "m"}
-    native_format = bytearray(b"<fBBB")
-    orders = [1, 2, 3, 0]
-    lengths = [1, 1, 1, 1]
-    array_lengths = [0, 0, 0, 0]
+    fieldunits_by_name: Dict[str, str] = {"distance_to_obstacle_m": "m", "min_safe_distance_m": "m", "field_of_view_deg": "deg", "bearing_to_obstacle_deg": "deg"}
+    native_format = bytearray(b"<fBBBfff")
+    orders = [1, 2, 3, 0, 4, 5, 6]
+    lengths = [1, 1, 1, 1, 1, 1, 1]
+    array_lengths = [0, 0, 0, 0, 0, 0, 0]
     crc_extra = 155
-    unpacker = struct.Struct("<fBBB")
+    unpacker = struct.Struct("<fBBBfff")
     instance_field = None
     instance_offset = -1
 
-    def __init__(self, is_enabled: int, is_safe: int, is_safe_latched: int, distance_to_obstacle_m: float):
+    def __init__(self, is_enabled: int, is_safe: int, is_safe_latched: int, distance_to_obstacle_m: float, min_safe_distance_m: float = 0, field_of_view_deg: float = 0, bearing_to_obstacle_deg: float = 0):
         MAVLink_message.__init__(self, MAVLink_magothy_teleop_safety_message.id, MAVLink_magothy_teleop_safety_message.msgname)
         self._fieldnames = MAVLink_magothy_teleop_safety_message.fieldnames
         self._instance_field = MAVLink_magothy_teleop_safety_message.instance_field
@@ -5992,9 +5992,12 @@ class MAVLink_magothy_teleop_safety_message(MAVLink_message):
         self.is_safe = is_safe
         self.is_safe_latched = is_safe_latched
         self.distance_to_obstacle_m = distance_to_obstacle_m
+        self.min_safe_distance_m = min_safe_distance_m
+        self.field_of_view_deg = field_of_view_deg
+        self.bearing_to_obstacle_deg = bearing_to_obstacle_deg
 
     def pack(self, mav: "MAVLink", force_mavlink1: bool = False) -> bytes:
-        return self._pack(mav, self.crc_extra, self.unpacker.pack(self.distance_to_obstacle_m, self.is_enabled, self.is_safe, self.is_safe_latched), force_mavlink1=force_mavlink1)
+        return self._pack(mav, self.crc_extra, self.unpacker.pack(self.distance_to_obstacle_m, self.is_enabled, self.is_safe, self.is_safe_latched, self.min_safe_distance_m, self.field_of_view_deg, self.bearing_to_obstacle_deg), force_mavlink1=force_mavlink1)
 
 
 # Define name on the class for backwards compatibility (it is now msgname).
@@ -17362,7 +17365,7 @@ class MAVLink(object):
         """
         self.send(self.magothy_beacon_detection_encode(beacon_id, position_mask, lat_deg, lon_deg, speed_mps, course_deg, error_m), force_mavlink1=force_mavlink1)
 
-    def magothy_teleop_safety_encode(self, is_enabled: int, is_safe: int, is_safe_latched: int, distance_to_obstacle_m: float) -> MAVLink_magothy_teleop_safety_message:
+    def magothy_teleop_safety_encode(self, is_enabled: int, is_safe: int, is_safe_latched: int, distance_to_obstacle_m: float, min_safe_distance_m: float = 0, field_of_view_deg: float = 0, bearing_to_obstacle_deg: float = 0) -> MAVLink_magothy_teleop_safety_message:
         """
         Teleop Safetey status message
 
@@ -17370,11 +17373,14 @@ class MAVLink(object):
         is_safe                   : 1 is teleop is currently safe, 0 if unsafe (type:uint8_t)
         is_safe_latched           : 1 if teleop safety is latched unsafe, 0 if not latched (type:uint8_t)
         distance_to_obstacle_m        : Distance to nearest obstacle (m), NaN if no obstacle detected [m] (type:float)
+        min_safe_distance_m        : Minimum distance to maintain from obstacles (m) [m] (type:float)
+        field_of_view_deg         : Field of view (deg) [deg] (type:float)
+        bearing_to_obstacle_deg        : Bearing to nearest obstacle (deg) clockwise from north, NaN if no obstacle detected [deg] (type:float)
 
         """
-        return MAVLink_magothy_teleop_safety_message(is_enabled, is_safe, is_safe_latched, distance_to_obstacle_m)
+        return MAVLink_magothy_teleop_safety_message(is_enabled, is_safe, is_safe_latched, distance_to_obstacle_m, min_safe_distance_m, field_of_view_deg, bearing_to_obstacle_deg)
 
-    def magothy_teleop_safety_send(self, is_enabled: int, is_safe: int, is_safe_latched: int, distance_to_obstacle_m: float, force_mavlink1: bool = False) -> None:
+    def magothy_teleop_safety_send(self, is_enabled: int, is_safe: int, is_safe_latched: int, distance_to_obstacle_m: float, min_safe_distance_m: float = 0, field_of_view_deg: float = 0, bearing_to_obstacle_deg: float = 0, force_mavlink1: bool = False) -> None:
         """
         Teleop Safetey status message
 
@@ -17382,9 +17388,12 @@ class MAVLink(object):
         is_safe                   : 1 is teleop is currently safe, 0 if unsafe (type:uint8_t)
         is_safe_latched           : 1 if teleop safety is latched unsafe, 0 if not latched (type:uint8_t)
         distance_to_obstacle_m        : Distance to nearest obstacle (m), NaN if no obstacle detected [m] (type:float)
+        min_safe_distance_m        : Minimum distance to maintain from obstacles (m) [m] (type:float)
+        field_of_view_deg         : Field of view (deg) [deg] (type:float)
+        bearing_to_obstacle_deg        : Bearing to nearest obstacle (deg) clockwise from north, NaN if no obstacle detected [deg] (type:float)
 
         """
-        self.send(self.magothy_teleop_safety_encode(is_enabled, is_safe, is_safe_latched, distance_to_obstacle_m), force_mavlink1=force_mavlink1)
+        self.send(self.magothy_teleop_safety_encode(is_enabled, is_safe, is_safe_latched, distance_to_obstacle_m, min_safe_distance_m, field_of_view_deg, bearing_to_obstacle_deg), force_mavlink1=force_mavlink1)
 
     def sys_status_encode(self, onboard_control_sensors_present: int, onboard_control_sensors_enabled: int, onboard_control_sensors_health: int, load: int, voltage_battery: int, current_battery: int, battery_remaining: int, drop_rate_comm: int, errors_comm: int, errors_count1: int, errors_count2: int, errors_count3: int, errors_count4: int) -> MAVLink_sys_status_message:
         """
