@@ -377,6 +377,35 @@ enums["MAGOTHY_LICENSE_TRANSFER_TYPE"][2] = EnumEntry("MAGOTHY_LICENSE_TRANSFER_
 MAGOTHY_LICENSE_TRANSFER_TYPE_ENUM_END = 3
 enums["MAGOTHY_LICENSE_TRANSFER_TYPE"][3] = EnumEntry("MAGOTHY_LICENSE_TRANSFER_TYPE_ENUM_END", """""")
 
+# MAGOTHY_GPS_SPOOFING
+enums["MAGOTHY_GPS_SPOOFING"] = {}
+MAGOTHY_GPS_SPOOFING_ENABLED = 1
+enums["MAGOTHY_GPS_SPOOFING"][1] = EnumEntry("MAGOTHY_GPS_SPOOFING_ENABLED", """Set if GPS spoofing detection is enabled""")
+MAGOTHY_GPS_SPOOFING_EVALUATED = 2
+enums["MAGOTHY_GPS_SPOOFING"][2] = EnumEntry("MAGOTHY_GPS_SPOOFING_EVALUATED", """Set if GPS spoofing is evaluated""")
+MAGOTHY_GPS_SPOOFING_DETECTED = 4
+enums["MAGOTHY_GPS_SPOOFING"][4] = EnumEntry("MAGOTHY_GPS_SPOOFING_DETECTED", """Set if GPS spoofing is detected""")
+MAGOTHY_GPS_SPOOFING_MITIGATION_ENABLED = 8
+enums["MAGOTHY_GPS_SPOOFING"][8] = EnumEntry("MAGOTHY_GPS_SPOOFING_MITIGATION_ENABLED", """Set if GPS spoofing mitigation is enabled""")
+MAGOTHY_GPS_SPOOFING_MITIGATION_ACTIVE = 16
+enums["MAGOTHY_GPS_SPOOFING"][16] = EnumEntry("MAGOTHY_GPS_SPOOFING_MITIGATION_ACTIVE", """Set if GPS spoofing mitigation is active""")
+MAGOTHY_GPS_SPOOFING_GGA_FRESH = 32
+enums["MAGOTHY_GPS_SPOOFING"][32] = EnumEntry("MAGOTHY_GPS_SPOOFING_GGA_FRESH", """Set if GPS GGA data is fresh""")
+MAGOTHY_GPS_SPOOFING_RMC_FRESH = 64
+enums["MAGOTHY_GPS_SPOOFING"][64] = EnumEntry("MAGOTHY_GPS_SPOOFING_RMC_FRESH", """Set if GPS RMC data is fresh""")
+MAGOTHY_GPS_SPOOFING_GST_FRESH = 128
+enums["MAGOTHY_GPS_SPOOFING"][128] = EnumEntry("MAGOTHY_GPS_SPOOFING_GST_FRESH", """Set if GPS GST data is fresh""")
+MAGOTHY_GPS_SPOOFING_ATTITUDE_FRESH = 256
+enums["MAGOTHY_GPS_SPOOFING"][256] = EnumEntry("MAGOTHY_GPS_SPOOFING_ATTITUDE_FRESH", """Set if attitude data is fresh""")
+MAGOTHY_GPS_SPOOFING_ACCELERATION_FRESH = 512
+enums["MAGOTHY_GPS_SPOOFING"][512] = EnumEntry("MAGOTHY_GPS_SPOOFING_ACCELERATION_FRESH", """Set if acceleration data is fresh""")
+MAGOTHY_GPS_SPOOFING_ANGULAR_RATE_FRESH = 1024
+enums["MAGOTHY_GPS_SPOOFING"][1024] = EnumEntry("MAGOTHY_GPS_SPOOFING_ANGULAR_RATE_FRESH", """Set if angular rate data is fresh""")
+MAGOTHY_GPS_SPOOFING_SPEED_FRESH = 2048
+enums["MAGOTHY_GPS_SPOOFING"][2048] = EnumEntry("MAGOTHY_GPS_SPOOFING_SPEED_FRESH", """Set if speed data is fresh""")
+MAGOTHY_GPS_SPOOFING_ENUM_END = 2049
+enums["MAGOTHY_GPS_SPOOFING"][2049] = EnumEntry("MAGOTHY_GPS_SPOOFING_ENUM_END", """""")
+
 # MAV_CMD
 enums["MAV_CMD"] = {}
 MAV_CMD_NAV_WAYPOINT = 16
@@ -5465,22 +5494,22 @@ class MAVLink_magothy_low_bandwidth_message(MAVLink_message):
 
     id = MAVLINK_MSG_ID_MAGOTHY_LOW_BANDWIDTH
     msgname = "MAGOTHY_LOW_BANDWIDTH"
-    fieldnames = ["type", "custom_mode", "onboard_control_sensors_present", "onboard_control_sensors_enabled", "onboard_control_sensors_health", "voltage_battery", "current_battery", "battery_remaining", "mission_seq", "lat", "lon", "speed", "course", "satellites_visible", "heading", "is_position_independent", "position_error", "desired_speed", "desired_course", "gcs_set_mode_uuid_lsb", "mission_crc", "altitude", "depth", "position_error_covar", "gps_spoofing_mitigation_enabled", "gps_spoofing_mitigation_active", "gps_spoofing_detected"]
-    ordered_fieldnames = ["custom_mode", "onboard_control_sensors_present", "onboard_control_sensors_enabled", "onboard_control_sensors_health", "lat", "lon", "voltage_battery", "current_battery", "mission_seq", "speed", "course", "heading", "position_error", "desired_speed", "desired_course", "type", "battery_remaining", "satellites_visible", "is_position_independent", "gcs_set_mode_uuid_lsb", "mission_crc", "altitude", "depth", "position_error_covar", "gps_spoofing_mitigation_enabled", "gps_spoofing_mitigation_active", "gps_spoofing_detected"]
-    fieldtypes = ["uint8_t", "uint32_t", "uint32_t", "uint32_t", "uint32_t", "uint16_t", "int16_t", "int8_t", "uint16_t", "int32_t", "int32_t", "uint16_t", "uint16_t", "uint8_t", "uint16_t", "uint8_t", "uint16_t", "uint16_t", "uint16_t", "uint32_t", "uint16_t", "float", "float", "float", "uint8_t", "uint8_t", "uint8_t"]
-    fielddisplays_by_name: Dict[str, str] = {"onboard_control_sensors_present": "bitmask", "onboard_control_sensors_enabled": "bitmask", "onboard_control_sensors_health": "bitmask"}
-    fieldenums_by_name: Dict[str, str] = {"type": "MAV_TYPE", "onboard_control_sensors_present": "MAV_SYS_STATUS_SENSOR", "onboard_control_sensors_enabled": "MAV_SYS_STATUS_SENSOR", "onboard_control_sensors_health": "MAV_SYS_STATUS_SENSOR"}
+    fieldnames = ["type", "custom_mode", "onboard_control_sensors_present", "onboard_control_sensors_enabled", "onboard_control_sensors_health", "voltage_battery", "current_battery", "battery_remaining", "mission_seq", "lat", "lon", "speed", "course", "satellites_visible", "heading", "is_position_independent", "position_error", "desired_speed", "desired_course", "gcs_set_mode_uuid_lsb", "mission_crc", "altitude", "depth", "position_error_covar", "gps_spoofing_status_bitmask"]
+    ordered_fieldnames = ["custom_mode", "onboard_control_sensors_present", "onboard_control_sensors_enabled", "onboard_control_sensors_health", "lat", "lon", "voltage_battery", "current_battery", "mission_seq", "speed", "course", "heading", "position_error", "desired_speed", "desired_course", "type", "battery_remaining", "satellites_visible", "is_position_independent", "gcs_set_mode_uuid_lsb", "mission_crc", "altitude", "depth", "position_error_covar", "gps_spoofing_status_bitmask"]
+    fieldtypes = ["uint8_t", "uint32_t", "uint32_t", "uint32_t", "uint32_t", "uint16_t", "int16_t", "int8_t", "uint16_t", "int32_t", "int32_t", "uint16_t", "uint16_t", "uint8_t", "uint16_t", "uint8_t", "uint16_t", "uint16_t", "uint16_t", "uint32_t", "uint16_t", "float", "float", "float", "uint16_t"]
+    fielddisplays_by_name: Dict[str, str] = {"onboard_control_sensors_present": "bitmask", "onboard_control_sensors_enabled": "bitmask", "onboard_control_sensors_health": "bitmask", "gps_spoofing_status_bitmask": "bitmask"}
+    fieldenums_by_name: Dict[str, str] = {"type": "MAV_TYPE", "onboard_control_sensors_present": "MAV_SYS_STATUS_SENSOR", "onboard_control_sensors_enabled": "MAV_SYS_STATUS_SENSOR", "onboard_control_sensors_health": "MAV_SYS_STATUS_SENSOR", "gps_spoofing_status_bitmask": "MAGOTHY_GPS_SPOOFING"}
     fieldunits_by_name: Dict[str, str] = {"voltage_battery": "mV", "current_battery": "cA", "battery_remaining": "%", "lat": "degE7", "lon": "degE7", "speed": "cm/s", "course": "cdeg", "heading": "cdeg", "position_error": "cm", "desired_speed": "cm/s", "desired_course": "cdeg", "altitude": "m", "depth": "m", "position_error_covar": "cm^2"}
-    native_format = bytearray(b"<IIIIiiHhHHHHHHHBbBBIHfffBBB")
-    orders = [15, 0, 1, 2, 3, 6, 7, 16, 8, 4, 5, 9, 10, 17, 11, 18, 12, 13, 14, 19, 20, 21, 22, 23, 24, 25, 26]
-    lengths = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 4, 1, 1, 1]
-    array_lengths = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0, 0, 0]
+    native_format = bytearray(b"<IIIIiiHhHHHHHHHBbBBIHfffH")
+    orders = [15, 0, 1, 2, 3, 6, 7, 16, 8, 4, 5, 9, 10, 17, 11, 18, 12, 13, 14, 19, 20, 21, 22, 23, 24]
+    lengths = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 4, 1]
+    array_lengths = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 4, 0]
     crc_extra = 243
-    unpacker = struct.Struct("<IIIIiiHhHHHHHHHBbBBIHff4fBBB")
+    unpacker = struct.Struct("<IIIIiiHhHHHHHHHBbBBIHff4fH")
     instance_field = None
     instance_offset = -1
 
-    def __init__(self, type: int, custom_mode: int, onboard_control_sensors_present: int, onboard_control_sensors_enabled: int, onboard_control_sensors_health: int, voltage_battery: int, current_battery: int, battery_remaining: int, mission_seq: int, lat: int, lon: int, speed: int, course: int, satellites_visible: int, heading: int, is_position_independent: int, position_error: int, desired_speed: int, desired_course: int, gcs_set_mode_uuid_lsb: int = 0, mission_crc: int = 0, altitude: float = 0, depth: float = 0, position_error_covar: Sequence[float] = (0, 0, 0, 0), gps_spoofing_mitigation_enabled: int = 0, gps_spoofing_mitigation_active: int = 0, gps_spoofing_detected: int = 0):
+    def __init__(self, type: int, custom_mode: int, onboard_control_sensors_present: int, onboard_control_sensors_enabled: int, onboard_control_sensors_health: int, voltage_battery: int, current_battery: int, battery_remaining: int, mission_seq: int, lat: int, lon: int, speed: int, course: int, satellites_visible: int, heading: int, is_position_independent: int, position_error: int, desired_speed: int, desired_course: int, gcs_set_mode_uuid_lsb: int = 0, mission_crc: int = 0, altitude: float = 0, depth: float = 0, position_error_covar: Sequence[float] = (0, 0, 0, 0), gps_spoofing_status_bitmask: int = 0):
         MAVLink_message.__init__(self, MAVLink_magothy_low_bandwidth_message.id, MAVLink_magothy_low_bandwidth_message.msgname)
         self._fieldnames = MAVLink_magothy_low_bandwidth_message.fieldnames
         self._instance_field = MAVLink_magothy_low_bandwidth_message.instance_field
@@ -5509,12 +5538,10 @@ class MAVLink_magothy_low_bandwidth_message(MAVLink_message):
         self.altitude = altitude
         self.depth = depth
         self.position_error_covar = position_error_covar
-        self.gps_spoofing_mitigation_enabled = gps_spoofing_mitigation_enabled
-        self.gps_spoofing_mitigation_active = gps_spoofing_mitigation_active
-        self.gps_spoofing_detected = gps_spoofing_detected
+        self.gps_spoofing_status_bitmask = gps_spoofing_status_bitmask
 
     def pack(self, mav: "MAVLink", force_mavlink1: bool = False) -> bytes:
-        return self._pack(mav, self.crc_extra, self.unpacker.pack(self.custom_mode, self.onboard_control_sensors_present, self.onboard_control_sensors_enabled, self.onboard_control_sensors_health, self.lat, self.lon, self.voltage_battery, self.current_battery, self.mission_seq, self.speed, self.course, self.heading, self.position_error, self.desired_speed, self.desired_course, self.type, self.battery_remaining, self.satellites_visible, self.is_position_independent, self.gcs_set_mode_uuid_lsb, self.mission_crc, self.altitude, self.depth, self.position_error_covar[0], self.position_error_covar[1], self.position_error_covar[2], self.position_error_covar[3], self.gps_spoofing_mitigation_enabled, self.gps_spoofing_mitigation_active, self.gps_spoofing_detected), force_mavlink1=force_mavlink1)
+        return self._pack(mav, self.crc_extra, self.unpacker.pack(self.custom_mode, self.onboard_control_sensors_present, self.onboard_control_sensors_enabled, self.onboard_control_sensors_health, self.lat, self.lon, self.voltage_battery, self.current_battery, self.mission_seq, self.speed, self.course, self.heading, self.position_error, self.desired_speed, self.desired_course, self.type, self.battery_remaining, self.satellites_visible, self.is_position_independent, self.gcs_set_mode_uuid_lsb, self.mission_crc, self.altitude, self.depth, self.position_error_covar[0], self.position_error_covar[1], self.position_error_covar[2], self.position_error_covar[3], self.gps_spoofing_status_bitmask), force_mavlink1=force_mavlink1)
 
 
 # Define name on the class for backwards compatibility (it is now msgname).
@@ -16989,7 +17016,7 @@ class MAVLink(object):
         """
         self.send(self.magothy_3d_mag_cal_params_encode(hard_iron, soft_iron, uncalibrated_norm_mean, uncalibrated_norm_std_dev, uncalibrated_norm_max_error, calibrated_norm_mean, calibrated_norm_std_dev, calibrated_norm_max_error), force_mavlink1=force_mavlink1)
 
-    def magothy_low_bandwidth_encode(self, type: int, custom_mode: int, onboard_control_sensors_present: int, onboard_control_sensors_enabled: int, onboard_control_sensors_health: int, voltage_battery: int, current_battery: int, battery_remaining: int, mission_seq: int, lat: int, lon: int, speed: int, course: int, satellites_visible: int, heading: int, is_position_independent: int, position_error: int, desired_speed: int, desired_course: int, gcs_set_mode_uuid_lsb: int = 0, mission_crc: int = 0, altitude: float = 0, depth: float = 0, position_error_covar: Sequence[float] = (0, 0, 0, 0), gps_spoofing_mitigation_enabled: int = 0, gps_spoofing_mitigation_active: int = 0, gps_spoofing_detected: int = 0) -> MAVLink_magothy_low_bandwidth_message:
+    def magothy_low_bandwidth_encode(self, type: int, custom_mode: int, onboard_control_sensors_present: int, onboard_control_sensors_enabled: int, onboard_control_sensors_health: int, voltage_battery: int, current_battery: int, battery_remaining: int, mission_seq: int, lat: int, lon: int, speed: int, course: int, satellites_visible: int, heading: int, is_position_independent: int, position_error: int, desired_speed: int, desired_course: int, gcs_set_mode_uuid_lsb: int = 0, mission_crc: int = 0, altitude: float = 0, depth: float = 0, position_error_covar: Sequence[float] = (0, 0, 0, 0), gps_spoofing_status_bitmask: int = 0) -> MAVLink_magothy_low_bandwidth_message:
         """
         The heartbeat message shows that a system or component is present and
         responding. The type and autopilot fields (along with the
@@ -17023,14 +17050,12 @@ class MAVLink(object):
         altitude                  : Altitude - NaN for unset. On USV: altimeter reading. On arial drone: MSL [m] (type:float)
         depth                     : Depth - NaN for unset. Depth below waterline [m] (type:float)
         position_error_covar        : Position error covariance matrix, units are m^2 - NaN for unset [cm^2] (type:float)
-        gps_spoofing_mitigation_enabled        : 1 if GPS spoofing mitigation is enabled, else 0 (type:uint8_t)
-        gps_spoofing_mitigation_active        : 1 if GPS spoofing mitigation is active, else 0 (type:uint8_t)
-        gps_spoofing_detected        : 1 if GPS spoofing is detected, else 0 (type:uint8_t)
+        gps_spoofing_status_bitmask        : Bitmask indicating GPS spoofing status (type:uint16_t, values:MAGOTHY_GPS_SPOOFING)
 
         """
-        return MAVLink_magothy_low_bandwidth_message(type, custom_mode, onboard_control_sensors_present, onboard_control_sensors_enabled, onboard_control_sensors_health, voltage_battery, current_battery, battery_remaining, mission_seq, lat, lon, speed, course, satellites_visible, heading, is_position_independent, position_error, desired_speed, desired_course, gcs_set_mode_uuid_lsb, mission_crc, altitude, depth, position_error_covar, gps_spoofing_mitigation_enabled, gps_spoofing_mitigation_active, gps_spoofing_detected)
+        return MAVLink_magothy_low_bandwidth_message(type, custom_mode, onboard_control_sensors_present, onboard_control_sensors_enabled, onboard_control_sensors_health, voltage_battery, current_battery, battery_remaining, mission_seq, lat, lon, speed, course, satellites_visible, heading, is_position_independent, position_error, desired_speed, desired_course, gcs_set_mode_uuid_lsb, mission_crc, altitude, depth, position_error_covar, gps_spoofing_status_bitmask)
 
-    def magothy_low_bandwidth_send(self, type: int, custom_mode: int, onboard_control_sensors_present: int, onboard_control_sensors_enabled: int, onboard_control_sensors_health: int, voltage_battery: int, current_battery: int, battery_remaining: int, mission_seq: int, lat: int, lon: int, speed: int, course: int, satellites_visible: int, heading: int, is_position_independent: int, position_error: int, desired_speed: int, desired_course: int, gcs_set_mode_uuid_lsb: int = 0, mission_crc: int = 0, altitude: float = 0, depth: float = 0, position_error_covar: Sequence[float] = (0, 0, 0, 0), gps_spoofing_mitigation_enabled: int = 0, gps_spoofing_mitigation_active: int = 0, gps_spoofing_detected: int = 0, force_mavlink1: bool = False) -> None:
+    def magothy_low_bandwidth_send(self, type: int, custom_mode: int, onboard_control_sensors_present: int, onboard_control_sensors_enabled: int, onboard_control_sensors_health: int, voltage_battery: int, current_battery: int, battery_remaining: int, mission_seq: int, lat: int, lon: int, speed: int, course: int, satellites_visible: int, heading: int, is_position_independent: int, position_error: int, desired_speed: int, desired_course: int, gcs_set_mode_uuid_lsb: int = 0, mission_crc: int = 0, altitude: float = 0, depth: float = 0, position_error_covar: Sequence[float] = (0, 0, 0, 0), gps_spoofing_status_bitmask: int = 0, force_mavlink1: bool = False) -> None:
         """
         The heartbeat message shows that a system or component is present and
         responding. The type and autopilot fields (along with the
@@ -17064,12 +17089,10 @@ class MAVLink(object):
         altitude                  : Altitude - NaN for unset. On USV: altimeter reading. On arial drone: MSL [m] (type:float)
         depth                     : Depth - NaN for unset. Depth below waterline [m] (type:float)
         position_error_covar        : Position error covariance matrix, units are m^2 - NaN for unset [cm^2] (type:float)
-        gps_spoofing_mitigation_enabled        : 1 if GPS spoofing mitigation is enabled, else 0 (type:uint8_t)
-        gps_spoofing_mitigation_active        : 1 if GPS spoofing mitigation is active, else 0 (type:uint8_t)
-        gps_spoofing_detected        : 1 if GPS spoofing is detected, else 0 (type:uint8_t)
+        gps_spoofing_status_bitmask        : Bitmask indicating GPS spoofing status (type:uint16_t, values:MAGOTHY_GPS_SPOOFING)
 
         """
-        self.send(self.magothy_low_bandwidth_encode(type, custom_mode, onboard_control_sensors_present, onboard_control_sensors_enabled, onboard_control_sensors_health, voltage_battery, current_battery, battery_remaining, mission_seq, lat, lon, speed, course, satellites_visible, heading, is_position_independent, position_error, desired_speed, desired_course, gcs_set_mode_uuid_lsb, mission_crc, altitude, depth, position_error_covar, gps_spoofing_mitigation_enabled, gps_spoofing_mitigation_active, gps_spoofing_detected), force_mavlink1=force_mavlink1)
+        self.send(self.magothy_low_bandwidth_encode(type, custom_mode, onboard_control_sensors_present, onboard_control_sensors_enabled, onboard_control_sensors_health, voltage_battery, current_battery, battery_remaining, mission_seq, lat, lon, speed, course, satellites_visible, heading, is_position_independent, position_error, desired_speed, desired_course, gcs_set_mode_uuid_lsb, mission_crc, altitude, depth, position_error_covar, gps_spoofing_status_bitmask), force_mavlink1=force_mavlink1)
 
     def magothy_protobuf_proxy_encode(self, proto_id: int, is_compressed: int, data_len: int, data: Sequence[int]) -> MAVLink_magothy_protobuf_proxy_message:
         """
