@@ -1,4 +1,4 @@
-__version__ = "32.27"
-mavlink_sha1 = "e6f76cb744239fbf4c9e7b6859a6d3d42a54ee94"
-mavlink_conan_version = "v32"
+__version__ = "33.28"
+mavlink_sha1 = "6386c3b42969dbdd115c3c12361c1c1fa8d2769c"
+mavlink_conan_version = "v33"
 from .magothy import *

@@ -2051,6 +2051,44 @@ enums["MAV_CMD"][50302].param[7] = """UUID bytes 0-3 encoded in little-endian"""
 MAV_CMD_ENUM_END = 50303
 enums["MAV_CMD"][50303] = EnumEntry("MAV_CMD_ENUM_END", """""")
 
+# MAGOTHY_BEARING_CORRECTION_SOURCE
+enums["MAGOTHY_BEARING_CORRECTION_SOURCE"] = {}
+MAGOTHY_BEARING_CORRECTION_SOURCE_BEACON = 0
+enums["MAGOTHY_BEARING_CORRECTION_SOURCE"][0] = EnumEntry("MAGOTHY_BEARING_CORRECTION_SOURCE_BEACON", """Hardware beacon paired with a position report.""")
+MAGOTHY_BEARING_CORRECTION_SOURCE_STATIONARY_BEACON = 1
+enums["MAGOTHY_BEARING_CORRECTION_SOURCE"][1] = EnumEntry("MAGOTHY_BEARING_CORRECTION_SOURCE_STATIONARY_BEACON", """Hardware beacon in the configured survey list.""")
+MAGOTHY_BEARING_CORRECTION_SOURCE_VISUAL_LANDMARK = 2
+enums["MAGOTHY_BEARING_CORRECTION_SOURCE"][2] = EnumEntry("MAGOTHY_BEARING_CORRECTION_SOURCE_VISUAL_LANDMARK", """Visual landmark.""")
+MAGOTHY_BEARING_CORRECTION_SOURCE_EXTERNAL = 3
+enums["MAGOTHY_BEARING_CORRECTION_SOURCE"][3] = EnumEntry("MAGOTHY_BEARING_CORRECTION_SOURCE_EXTERNAL", """External MAVLink bearing with a bundled position.""")
+MAGOTHY_BEARING_CORRECTION_SOURCE_ENUM_END = 4
+enums["MAGOTHY_BEARING_CORRECTION_SOURCE"][4] = EnumEntry("MAGOTHY_BEARING_CORRECTION_SOURCE_ENUM_END", """""")
+
+# MAGOTHY_BEARING_CORRECTION_OUTCOME
+enums["MAGOTHY_BEARING_CORRECTION_OUTCOME"] = {}
+MAGOTHY_BEARING_CORRECTION_OUTCOME_ACCEPTED = 0
+enums["MAGOTHY_BEARING_CORRECTION_OUTCOME"][0] = EnumEntry("MAGOTHY_BEARING_CORRECTION_OUTCOME_ACCEPTED", """Applied to the navigation estimate.""")
+MAGOTHY_BEARING_CORRECTION_OUTCOME_ESTIMATOR_REJECTED = 1
+enums["MAGOTHY_BEARING_CORRECTION_OUTCOME"][1] = EnumEntry("MAGOTHY_BEARING_CORRECTION_OUTCOME_ESTIMATOR_REJECTED", """Rejected by the estimator.""")
+MAGOTHY_BEARING_CORRECTION_OUTCOME_STALE = 2
+enums["MAGOTHY_BEARING_CORRECTION_OUTCOME"][2] = EnumEntry("MAGOTHY_BEARING_CORRECTION_OUTCOME_STALE", """Observation expired.""")
+MAGOTHY_BEARING_CORRECTION_OUTCOME_SUPERSEDED = 3
+enums["MAGOTHY_BEARING_CORRECTION_OUTCOME"][3] = EnumEntry("MAGOTHY_BEARING_CORRECTION_OUTCOME_SUPERSEDED", """A newer observation for this source superseded it.""")
+MAGOTHY_BEARING_CORRECTION_OUTCOME_NO_MATCHING_POSITION = 4
+enums["MAGOTHY_BEARING_CORRECTION_OUTCOME"][4] = EnumEntry("MAGOTHY_BEARING_CORRECTION_OUTCOME_NO_MATCHING_POSITION", """No usable matching source position.""")
+MAGOTHY_BEARING_CORRECTION_OUTCOME_INVALID_SOURCE = 5
+enums["MAGOTHY_BEARING_CORRECTION_OUTCOME"][5] = EnumEntry("MAGOTHY_BEARING_CORRECTION_OUTCOME_INVALID_SOURCE", """Invalid source or observation.""")
+MAGOTHY_BEARING_CORRECTION_OUTCOME_SOURCE_TOO_CLOSE = 6
+enums["MAGOTHY_BEARING_CORRECTION_OUTCOME"][6] = EnumEntry("MAGOTHY_BEARING_CORRECTION_OUTCOME_SOURCE_TOO_CLOSE", """Source closer than the permitted distance.""")
+MAGOTHY_BEARING_CORRECTION_OUTCOME_SOURCE_UNCERTAINTY = 7
+enums["MAGOTHY_BEARING_CORRECTION_OUTCOME"][7] = EnumEntry("MAGOTHY_BEARING_CORRECTION_OUTCOME_SOURCE_UNCERTAINTY", """Source position uncertainty too large.""")
+MAGOTHY_BEARING_CORRECTION_OUTCOME_POLICY_SKIPPED = 8
+enums["MAGOTHY_BEARING_CORRECTION_OUTCOME"][8] = EnumEntry("MAGOTHY_BEARING_CORRECTION_OUTCOME_POLICY_SKIPPED", """Skipped by the correction selection policy.""")
+MAGOTHY_BEARING_CORRECTION_OUTCOME_DISABLED = 9
+enums["MAGOTHY_BEARING_CORRECTION_OUTCOME"][9] = EnumEntry("MAGOTHY_BEARING_CORRECTION_OUTCOME_DISABLED", """Navigation from this source type is disabled.""")
+MAGOTHY_BEARING_CORRECTION_OUTCOME_ENUM_END = 10
+enums["MAGOTHY_BEARING_CORRECTION_OUTCOME"][10] = EnumEntry("MAGOTHY_BEARING_CORRECTION_OUTCOME_ENUM_END", """""")
+
 # FIRMWARE_VERSION_TYPE
 enums["FIRMWARE_VERSION_TYPE"] = {}
 FIRMWARE_VERSION_TYPE_DEV = 0
@@ -5032,6 +5070,7 @@ MAVLINK_MSG_ID_MAGOTHY_MISSION_TRANSFER = 50251
 MAVLINK_MSG_ID_MAGOTHY_MISSION_ACK = 50252
 MAVLINK_MSG_ID_MAGOTHY_BEACON_DETECTION = 50006
 MAVLINK_MSG_ID_MAGOTHY_TELEOP_SAFETY = 50007
+MAVLINK_MSG_ID_MAGOTHY_BEARING_CORRECTION = 50008
 MAVLINK_MSG_ID_SYS_STATUS = 1
 MAVLINK_MSG_ID_SYSTEM_TIME = 2
 MAVLINK_MSG_ID_PING = 4
@@ -6030,6 +6069,52 @@ class MAVLink_magothy_teleop_safety_message(MAVLink_message):
 # Define name on the class for backwards compatibility (it is now msgname).
 # Done with setattr to hide the class variable from mypy.
 setattr(MAVLink_magothy_teleop_safety_message, "name", mavlink_msg_deprecated_name_property())
+
+
+class MAVLink_magothy_bearing_correction_message(MAVLink_message):
+    """
+    One resolved bearing observation from a navigation correction
+    batch. Emitted for accepted and rejected observations; not a
+    command or measurement input.
+    """
+
+    id = MAVLINK_MSG_ID_MAGOTHY_BEARING_CORRECTION
+    msgname = "MAGOTHY_BEARING_CORRECTION"
+    fieldnames = ["source", "source_id", "measurement_time_usec", "correction_time_usec", "bearing_deg", "outcome"]
+    ordered_fieldnames = ["measurement_time_usec", "correction_time_usec", "bearing_deg", "source", "source_id", "outcome"]
+    fieldtypes = ["uint8_t", "char", "int64_t", "int64_t", "double", "uint8_t"]
+    fielddisplays_by_name: Dict[str, str] = {}
+    fieldenums_by_name: Dict[str, str] = {"source": "MAGOTHY_BEARING_CORRECTION_SOURCE", "outcome": "MAGOTHY_BEARING_CORRECTION_OUTCOME"}
+    fieldunits_by_name: Dict[str, str] = {"measurement_time_usec": "us", "correction_time_usec": "us", "bearing_deg": "deg"}
+    native_format = bytearray(b"<qqdBcB")
+    orders = [3, 4, 0, 1, 2, 5]
+    lengths = [1, 1, 1, 1, 1, 1]
+    array_lengths = [0, 0, 0, 0, 128, 0]
+    crc_extra = 182
+    unpacker = struct.Struct("<qqdB128sB")
+    instance_field = None
+    instance_offset = -1
+
+    def __init__(self, source: int, source_id: bytes, measurement_time_usec: int, correction_time_usec: int, bearing_deg: float, outcome: int):
+        MAVLink_message.__init__(self, MAVLink_magothy_bearing_correction_message.id, MAVLink_magothy_bearing_correction_message.msgname)
+        self._fieldnames = MAVLink_magothy_bearing_correction_message.fieldnames
+        self._instance_field = MAVLink_magothy_bearing_correction_message.instance_field
+        self._instance_offset = MAVLink_magothy_bearing_correction_message.instance_offset
+        self.source = source
+        self._source_id_raw = source_id
+        self.source_id = source_id.split(b"\x00", 1)[0].decode("ascii", errors="replace")
+        self.measurement_time_usec = measurement_time_usec
+        self.correction_time_usec = correction_time_usec
+        self.bearing_deg = bearing_deg
+        self.outcome = outcome
+
+    def pack(self, mav: "MAVLink", force_mavlink1: bool = False) -> bytes:
+        return self._pack(mav, self.crc_extra, self.unpacker.pack(self.measurement_time_usec, self.correction_time_usec, self.bearing_deg, self.source, self._source_id_raw, self.outcome), force_mavlink1=force_mavlink1)
+
+
+# Define name on the class for backwards compatibility (it is now msgname).
+# Done with setattr to hide the class variable from mypy.
+setattr(MAVLink_magothy_bearing_correction_message, "name", mavlink_msg_deprecated_name_property())
 
 
 class MAVLink_sys_status_message(MAVLink_message):
@@ -16228,6 +16313,7 @@ mavlink_map: Dict[int, Type[MAVLink_message]] = {
     MAVLINK_MSG_ID_MAGOTHY_MISSION_ACK: MAVLink_magothy_mission_ack_message,
     MAVLINK_MSG_ID_MAGOTHY_BEACON_DETECTION: MAVLink_magothy_beacon_detection_message,
     MAVLINK_MSG_ID_MAGOTHY_TELEOP_SAFETY: MAVLink_magothy_teleop_safety_message,
+    MAVLINK_MSG_ID_MAGOTHY_BEARING_CORRECTION: MAVLink_magothy_bearing_correction_message,
     MAVLINK_MSG_ID_SYS_STATUS: MAVLink_sys_status_message,
     MAVLINK_MSG_ID_SYSTEM_TIME: MAVLink_system_time_message,
     MAVLINK_MSG_ID_PING: MAVLink_ping_message,
@@ -17417,6 +17503,38 @@ class MAVLink(object):
 
         """
         self.send(self.magothy_teleop_safety_encode(is_enabled, is_safe, is_safe_latched, distance_to_obstacle_m, min_safe_distance_m, field_of_view_deg, bearing_to_obstacle_deg), force_mavlink1=force_mavlink1)
+
+    def magothy_bearing_correction_encode(self, source: int, source_id: bytes, measurement_time_usec: int, correction_time_usec: int, bearing_deg: float, outcome: int) -> MAVLink_magothy_bearing_correction_message:
+        """
+        One resolved bearing observation from a navigation correction batch.
+        Emitted for accepted and rejected observations; not a command
+        or measurement input.
+
+        source                    : Observation source type. (type:uint8_t, values:MAGOTHY_BEARING_CORRECTION_SOURCE)
+        source_id                 : Source identifier bytes, truncated to 128 bytes; NUL padded when shorter. Beacon identifiers are decimal internal beacon IDs. (type:char)
+        measurement_time_usec        : Measurement timestamp on the sender's monotonic clock, not Unix time. [us] (type:int64_t)
+        correction_time_usec        : Correction batch timestamp on the same sender monotonic clock. [us] (type:int64_t)
+        bearing_deg               : Original bearing: clockwise from north for visual landmarks, clockwise from the bow for all other sources. May be non-finite for an invalid observation. [deg] (type:double)
+        outcome                   : Observation disposition. (type:uint8_t, values:MAGOTHY_BEARING_CORRECTION_OUTCOME)
+
+        """
+        return MAVLink_magothy_bearing_correction_message(source, source_id, measurement_time_usec, correction_time_usec, bearing_deg, outcome)
+
+    def magothy_bearing_correction_send(self, source: int, source_id: bytes, measurement_time_usec: int, correction_time_usec: int, bearing_deg: float, outcome: int, force_mavlink1: bool = False) -> None:
+        """
+        One resolved bearing observation from a navigation correction batch.
+        Emitted for accepted and rejected observations; not a command
+        or measurement input.
+
+        source                    : Observation source type. (type:uint8_t, values:MAGOTHY_BEARING_CORRECTION_SOURCE)
+        source_id                 : Source identifier bytes, truncated to 128 bytes; NUL padded when shorter. Beacon identifiers are decimal internal beacon IDs. (type:char)
+        measurement_time_usec        : Measurement timestamp on the sender's monotonic clock, not Unix time. [us] (type:int64_t)
+        correction_time_usec        : Correction batch timestamp on the same sender monotonic clock. [us] (type:int64_t)
+        bearing_deg               : Original bearing: clockwise from north for visual landmarks, clockwise from the bow for all other sources. May be non-finite for an invalid observation. [deg] (type:double)
+        outcome                   : Observation disposition. (type:uint8_t, values:MAGOTHY_BEARING_CORRECTION_OUTCOME)
+
+        """
+        self.send(self.magothy_bearing_correction_encode(source, source_id, measurement_time_usec, correction_time_usec, bearing_deg, outcome), force_mavlink1=force_mavlink1)
 
     def sys_status_encode(self, onboard_control_sensors_present: int, onboard_control_sensors_enabled: int, onboard_control_sensors_health: int, load: int, voltage_battery: int, current_battery: int, battery_remaining: int, drop_rate_comm: int, errors_comm: int, errors_count1: int, errors_count2: int, errors_count3: int, errors_count4: int) -> MAVLink_sys_status_message:
         """
