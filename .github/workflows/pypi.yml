@@ -4,30 +4,41 @@ on:
   push:
     branches:
       - main
+  pull_request:
+    branches:
+      - main
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - name: Set up uv
+        uses: astral-sh/setup-uv@v10.4.0
         with:
-          python-version: "3.8"
+          version: latest
+
+      - name: Set up Python 3.8
+        run: uv python install 3.8
 
       - name: Build
+        run: uv build --python 3.8
+
+      - name: Smoke-test wheel with Python 3.8
         run: |
-          python3 -m pip install build
-          python3 -m build
+          uv venv --python 3.8 .venv
+          uv pip install --python .venv/bin/python dist/*.whl
+          .venv/bin/python -I -c "import mrtmavlink; print(mrtmavlink.__version__)"
 
       - name: upload dists
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: dists
           path: dist/
 
   publish:
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     needs:
       - build
@@ -36,7 +47,7 @@ jobs:
 
     steps:
       - name: Retrieve release distributions
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8
         with:
           name: dists
           path: dist/
